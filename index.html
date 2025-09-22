@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital AI Receptionist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.2em;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #34495e;
+            font-weight: 500;
+            font-size: 1.1em;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e6ed;
+            border-radius: 12px;
+            font-size: 1em;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+        }
+
+        .tabs {
+            display: flex;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 5px;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px 20px;
+            text-align: center;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #7f8c8d;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .result.success {
+            background: rgba(46, 204, 113, 0.1);
+            border: 2px solid #27ae60;
+            color: #27ae60;
+        }
+
+        .result.error {
+            background: rgba(231, 76, 60, 0.1);
+            border: 2px solid #e74c3c;
+            color: #e74c3c;
+        }
+
+        .result.info {
+            background: rgba(52, 152, 219, 0.1);
+            border: 2px solid #3498db;
+            color: #3498db;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .slots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .slot-card {
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid #e0e6ed;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slot-card:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .slot-card.selected {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .doctor-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid #667eea;
+        }
+
+        .doctor-name {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .doctor-specialty {
+            color: #667eea;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .doctor-info {
+            color: #7f8c8d;
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+
+        .payment-info {
+            background: rgba(255, 193, 7, 0.1);
+            border: 2px solid #f39c12;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .payment-info h3 {
+            color: #f39c12;
+            margin-bottom: 15px;
+        }
+
+        .chat-container {
+            grid-column: 1 / -1;
+            max-height: 500px;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 20px;
+        }
+
+        .chat-message {
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 15px;
+            max-width: 80%;
+        }
+
+        .chat-message.user {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-left: auto;
+        }
+
+        .chat-message.assistant {
+            background: rgba(236, 240, 241, 0.8);
+            color: #2c3e50;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #e0e6ed;
+            border-radius: 25px;
+            font-size: 1em;
+        }
+
+        .chat-input button {
+            padding: 15px 25px;
+            border-radius: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏥 Hospital AI Receptionist</h1>
+            <p>Your intelligent assistant for all hospital services</p>
+        </div>
+
+        <div class="main-content">
+            <div class="card">
+                <h2>👤 Patient Services</h2>
+                <div class="tabs">
+                    <button class="tab active" onclick="switchTab('register')">Register</button>
+                    <button class="tab" onclick="switchTab('search')">Search</button>
+                    <button class="tab" onclick="switchTab('doctor-suggestion')">Find Doctor</button>
+                </div>
+
+                <div id="register" class="tab-content active">
+                    <form id="registerForm">
+                        <div class="form-group">
+                            <label for="patientName">Full Name</label>
+                            <input type="text" id="patientName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="patientDOB">Date of Birth</label>
+                            <input type="date" id="patientDOB" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="patientAddress">Address</label>
+                            <textarea id="patientAddress" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="patientPhone">Phone Number</label>
+                            <input type="tel" id="patientPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="patientEmail">Email</label>
+                            <input type="email" id="patientEmail" required>
+                        </div>
+                        <button type="submit" class="btn">Register Patient</button>
+                    </form>
+                </div>
+
+                <div id="search" class="tab-content">
+                    <form id="searchForm">
+                        <div class="form-group">
+                            <label for="searchName">Patient Name</label>
+                            <input type="text" id="searchName" required>
+                        </div>
+                        <button type="submit" class="btn">Search Patient</button>
+                    </form>
+                </div>
+
+                <div id="doctor-suggestion" class="tab-content">
+                    <form id="doctorSuggestionForm">
+                        <div class="form-group">
+                            <label for="symptoms">Describe your symptoms</label>
+                            <textarea id="symptoms" rows="4" placeholder="e.g., chest pain, headache, fever..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Find Suitable Doctor</button>
+                    </form>
+                </div>
+
+                <div id="patientResult" class="result" style="display: none;"></div>
+            </div>
+
+            <div class="card">
+                <h2>📅 Appointment Management</h2>
+                <div class="tabs">
+                    <button class="tab active" onclick="switchTab('book')">Book</button>
+                    <button class="tab" onclick="switchTab('cancel')">Cancel</button>
+                    <button class="tab" onclick="switchTab('reschedule')">Reschedule</button>
+                    <button class="tab" onclick="switchTab('view')">View</button>
+                </div>
+
+                <div id="book" class="tab-content active">
+                    <form id="bookForm">
+                        <div class="form-group">
+                            <label for="bookPatientId">Patient ID</label>
+                            <input type="text" id="bookPatientId" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="bookDoctor">Doctor Name</label>
+                            <input type="text" id="bookDoctor" required>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="paymentConfirmed"> I confirm payment has been made
+                            </label>
+                        </div>
+                        <button type="submit" class="btn">Book Appointment</button>
+                        <button type="button" class="btn btn-secondary" onclick="viewAvailableSlots()">View Available Slots</button>
+                    </form>
+                </div>
+
+                <div id="cancel" class="tab-content">
+                    <form id="cancelForm">
+                        <div class="form-group">
+                            <label for="cancelName">Patient Name</label>
+                            <input type="text" id="cancelName" required>
+                        </div>
+                        <button type="submit" class="btn btn-danger">Cancel Appointment</button>
+                    </form>
+                </div>
+
+                <div id="reschedule" class="tab-content">
+                    <form id="rescheduleForm">
+                        <div class="form-group">
+                            <label for="reschedulePatientName">Patient Name</label>
+                            <input type="text" id="reschedulePatientName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="rescheduleDoctor">Current Doctor</label>
+                            <input type="text" id="rescheduleDoctor" required>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="sameDoctor" checked> Keep same doctor
+                            </label>
+                        </div>
+                        <button type="submit" class="btn">Get Available Slots</button>
+                    </form>
+                </div>
+
+                <div id="view" class="tab-content">
+                    <form id="viewForm">
+                        <div class="form-group">
+                            <label for="viewPatientName">Patient Name</label>
+                            <input type="text" id="viewPatientName" required>
+                        </div>
+                        <button type="submit" class="btn">View Appointments</button>
+                    </form>
+                </div>
+
+                <div id="appointmentResult" class="result" style="display: none;"></div>
+            </div>
+        </div>
+
+        <div class="card chat-container">
+            <h2>💬 AI Assistant Chat</h2>
+            <div id="chatMessages"></div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Ask me anything about hospital services...">
+                <button class="btn" onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <p>Processing your request...</p>
+    </div>
+
+    <script>
+        const API_BASE = 'http://127.0.0.1:5000/api';
+        let selectedSlot = null;
+        let availableSlots = [];
+
+        // Tab switching functionality
+        function switchTab(tabName) {
+            // Remove active from all tabs and contents
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Add active to clicked tab and corresponding content
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        // Utility functions
+        function showLoading() {
+            document.getElementById('loading').style.display = 'block';
+        }
+
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+        }
+
+        function showResult(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            element.innerHTML = message;
+            element.className = `result ${type}`;
+            element.style.display = 'block';
+        }
+
+        function hideResult(elementId) {
+            document.getElementById(elementId).style.display = 'none';
+        }
+
+        // API call wrapper
+         async function apiCall(endpoint, method = 'GET', data = null) {
+            showLoading();
+            try {
+                const options = {
+                    method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                };
+                
+                if (data) {
+                    options.body = JSON.stringify(data);
+                }
+
+                const response = await fetch(`${API_BASE}${endpoint}`, options);
+                const result = await response.json();
+                
+                hideLoading();
+                return result;
+            } catch (error) {
+                hideLoading();
+                console.error('API Error:', error);
+                return { success: false, message: 'Network error. Please try again.' };
+            }
+        }
+
+
+
+        // Patient registration
+         document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const data = {
+                name: document.getElementById('patientName').value,
+                dob: document.getElementById('patientDOB').value,
+                address: document.getElementById('patientAddress').value,
+                phone: document.getElementById('patientPhone').value,
+                email: document.getElementById('patientEmail').value
+            };
+
+            const result = await apiCall('/register', 'POST', data);
+            
+            if (result.success) {
+                showResult('patientResult', 
+                    `✅ Patient registered successfully!<br>
+                    <strong>Patient ID:</strong> ${result.patient_id}<br>
+                    Please save this ID for future appointments.`, 
+                    'success');
+                document.getElementById('registerForm').reset();
+            } else {
+                showResult('patientResult', `❌ ${result.message}`, 'error');
+            }
+        });
+
+        // Patient search
+        document.getElementById('searchForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('searchName').value;
+            const result = await apiCall(`/patient/${encodeURIComponent(name)}`);
+            
+            if (result.success) {
+                const patient = result.patient;
+                showResult('patientResult', 
+                    `👤 <strong>Patient Found:</strong><br>
+                    <strong>Name:</strong> ${patient.name}<br>
+                    <strong>ID:</strong> ${patient.patient_id}<br>
+                    <strong>DOB:</strong> ${patient.dob}<br>
+                    <strong>Phone:</strong> ${patient.phone}<br>
+                    <strong>Email:</strong> ${patient.email}<br>
+                    <strong>Address:</strong> ${patient.address}`, 
+                    'success');
+            } else {
+                showResult('patientResult', `❌ ${result.message}`, 'error');
+            }
+        });
+
+
+        // Doctor suggestion
+        document.getElementById('doctorSuggestionForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const symptoms = document.getElementById('symptoms').value;
+            const result = await apiCall('/doctor-suggestion', 'POST', { symptom: symptoms });
+            
+            if (result.error) {
+                showResult('patientResult', `❌ ${result.error}`, 'error');
+            } else {
+                const doctor = result.doctor;
+                showResult('patientResult', 
+                    `<div class="doctor-card">
+                        <div class="doctor-name">Dr. ${doctor.name}</div>
+                        <div class="doctor-specialty">${doctor.specialization}</div>
+                        <div class="doctor-info">
+                            <strong>Education:</strong> ${doctor.education}<br>
+                            <strong>Experience:</strong> ${doctor.experience}<br>
+                            <strong>Consultation Fee:</strong> ${doctor.fee}<br>
+                            <strong>Contact:</strong> ${doctor.contact}<br>
+                            <strong>About:</strong> ${doctor.bio}
+                        </div>
+                    </div>`, 
+                    'success');
+            }
+        });
+
+        // Book appointment
+        document.getElementById('bookForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const data = {
+                patient_id: document.getElementById('bookPatientId').value,
+                doctor_name: document.getElementById('bookDoctor').value,
+                payment_confirmed: document.getElementById('paymentConfirmed').checked
+            };
+
+            const result = await apiCall('/book-appointment', 'POST', data);
+            
+            if (result.success) {
+                const appt = result.appointment;
+                showResult('appointmentResult', 
+                    `✅ Appointment booked successfully!<br>
+                    <strong>Patient:</strong> ${appt.patient_name}<br>
+                    <strong>Doctor:</strong> ${appt.doctor}<br>
+                    <strong>Date:</strong> ${appt.date}<br>
+                    <strong>Time:</strong> ${appt.time}`, 
+                    'success');
+                document.getElementById('bookForm').reset();
+            } else {
+                let message = `❌ ${result.message}`;
+                if (result.payment_details) {
+                    message += `<div class="payment-info">
+                        <h3>💳 Payment Required</h3>
+                        <p>${result.payment_details}</p>
+                    </div>`;
+                }
+                showResult('appointmentResult', message, 'error');
+            }
+        });
+
+        // View available slots
+        async function viewAvailableSlots() {
+            const result = await apiCall('/available-slots');
+            
+            if (result.success) {
+                availableSlots = result.available_slots;
+                let slotsHtml = '<h3>📅 Available Slots</h3><div class="slots-grid">';
+                
+                availableSlots.forEach((slot, index) => {
+                    slotsHtml += `
+                        <div class="slot-card" onclick="selectSlot(${index})">
+                            <strong>Dr. ${slot.doctor}</strong><br>
+                            📅 ${slot.date}<br>
+                            ⏰ ${slot.time}
+                        </div>
+                    `;
+                });
+                
+                slotsHtml += '</div>';
+                showResult('appointmentResult', slotsHtml, 'info');
+            } else {
+                showResult('appointmentResult', `❌ ${result.message}`, 'error');
+            }
+        }
+
+        function selectSlot(index) {
+            selectedSlot = index;
+            document.querySelectorAll('.slot-card').forEach(card => card.classList.remove('selected'));
+            document.querySelectorAll('.slot-card')[index].classList.add('selected');
+            
+            const slot = availableSlots[index];
+            document.getElementById('bookDoctor').value = slot.doctor;
+        }
+
+        // Cancel appointment
+        document.getElementById('cancelForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('cancelName').value;
+            const result = await apiCall('/cancel-appointment', 'POST', { name });
+            
+            if (result.success) {
+                const appt = result.cancelled_appointment;
+                showResult('appointmentResult', 
+                    `✅ Appointment cancelled successfully!<br>
+                    <strong>Patient:</strong> ${appt.patient_name}<br>
+                    <strong>Doctor:</strong> ${appt.doctor}<br>
+                    <strong>Date:</strong> ${appt.date}<br>
+                    <strong>Time:</strong> ${appt.time}`, 
+                    'success');
+                document.getElementById('cancelForm').reset();
+            } else {
+                showResult('appointmentResult', `❌ ${result.message}`, 'error');
+            }
+        });
+
+        // Reschedule appointment
+        document.getElementById('rescheduleForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const data = {
+                name: document.getElementById('reschedulePatientName').value,
+                doctor_name: document.getElementById('rescheduleDoctor').value,
+                same_doctor: document.getElementById('sameDoctor').checked
+            };
+
+            const result = await apiCall('/reschedule-slots', 'POST', data);
+            
+            if (result.success) {
+                availableSlots = result.available_slots;
+                let slotsHtml = `<h3>📅 Available Slots for Dr. ${result.doctor}</h3><div class="slots-grid">`;
+                
+                availableSlots.forEach((slot, index) => {
+                    slotsHtml += `
+                        <div class="slot-card" onclick="confirmReschedule(${index})">
+                            📅 ${slot.date}<br>
+                            ⏰ ${slot.time}
+                        </div>
+                    `;
+                });
+                
+                slotsHtml += '</div>';
+                showResult('appointmentResult', slotsHtml, 'info');
+            } else {
+                showResult('appointmentResult', `❌ ${result.message}`, 'error');
+            }
+        });
+
+        async function confirmReschedule(slotIndex) {
+            const data = {
+                name: document.getElementById('reschedulePatientName').value,
+                slot_index: slotIndex
+            };
+
+            const result = await apiCall('/reschedule-appointment', 'POST', data);
+            
+            if (result.success) {
+                const appt = result.new_appointment;
+                showResult('appointmentResult', 
+                    `✅ Appointment rescheduled successfully!<br>
+                    <strong>Patient:</strong> ${appt.patient_name}<br>
+                    <strong>Doctor:</strong> ${appt.doctor}<br>
+                    <strong>New Date:</strong> ${appt.date}<br>
+                    <strong>New Time:</strong> ${appt.time}`, 
+                    'success');
+                document.getElementById('rescheduleForm').reset();
+            } else {
+                showResult('appointmentResult', `❌ ${result.message}`, 'error');
+            }
+        }
+
+        // View appointments
+        document.getElementById('viewForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('viewPatientName').value;
+            const result = await apiCall(`/appointments/${encodeURIComponent(name)}`);
+            
+            if (result.success) {
+                if (result.appointments.length === 0) {
+                    showResult('appointmentResult', '📅 No active appointments found.', 'info');
+                } else {
+                    let appointmentsHtml = '<h3>📅 Your Appointments</h3>';
+                    result.appointments.forEach(appt => {
+                        appointmentsHtml += `
+                            <div class="doctor-card">
+                                <strong>Dr. ${appt.doctor}</strong><br>
+                                📅 ${appt.date}<br>
+                                ⏰ ${appt.time}<br>
+                                <span style="color: #27ae60;">✅ Confirmed</span>
+                            </div>
+                        `;
+                    });
+                    showResult('appointmentResult', appointmentsHtml, 'success');
+                }
+            } else {
+                showResult('appointmentResult', `❌ ${result.message}`, 'error');
+            }
+        });
+
+        // Chat functionality
+        function addMessage(message, isUser = false) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${isUser ? 'user' : 'assistant'}`;
+            messageDiv.innerHTML = message;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            addMessage(message, true);
+            input.value = '';
+            
+            const result = await apiCall('/ai-query', 'POST', { query: message });
+            
+            if (result.success) {
+                addMessage(result.response);
+            } else {
+                addMessage('Sorry, I encountered an error. Please try again.');
+            }
+        }
+
+        // Enter key support for chat
+        document.getElementById('chatInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Initialize chat
+        addMessage('👋 Hello! I\'m your AI hospital receptionist. I can help you with patient registration, appointments, doctor suggestions, and answer any questions about our services. How can I assist you today?');
+
+        // FAQ functionality
+        async function askFAQ(question) {
+            const result = await apiCall('/faq', 'POST', { question });
+            
+            if (result.success) {
+                addMessage(`❓ <strong>FAQ:</strong> ${result.answer}`);
+            } else {
+                // Fallback to AI if no FAQ found
+                const aiResult = await apiCall('/ai-query', 'POST', { query: question });
+                if (aiResult.success) {
+                    addMessage(`🤖 <strong>AI Response:</strong> ${aiResult.response}`);
+                }
+            }
+        }
+
+        // Quick action buttons
+        function addQuickActions() {
+            const quickActions = document.createElement('div');
+            quickActions.innerHTML = `
+                <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+                    <button class="btn" style="font-size: 0.9em; padding: 8px 16px;" onclick="askFAQ('What are visiting hours?')">Visiting Hours</button>
+                    <button class="btn" style="font-size: 0.9em; padding: 8px 16px;" onclick="askFAQ('What documents do I need?')">Required Documents</button>
+                    <button class="btn" style="font-size: 0.9em; padding: 8px 16px;" onclick="askFAQ('How do I pay?')">Payment Methods</button>
+                    <button class="btn" style="font-size: 0.9em; padding: 8px 16px;" onclick="askFAQ('Emergency contact?')">Emergency</button>
+                </div>
+            `;
+            document.getElementById('chatMessages').appendChild(quickActions);
+        }
+
+        // Initialize quick actions
+        addQuickActions();
+
+        // Form validation helpers
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function validatePhone(phone) {
+            const re = /^[\+]?[0-9\s\-\(\)]{10,}$/;
+            return re.test(phone);
+        }
+
+        // Enhanced form validation
+        document.getElementById('registerForm').addEventListener('input', (e) => {
+            const field = e.target;
+            const value = field.value;
+            
+            if (field.id === 'patientEmail' && value) {
+                if (!validateEmail(value)) {
+                    field.style.borderColor = '#e74c3c';
+                } else {
+                    field.style.borderColor = '#27ae60';
+                }
+            }
+            
+            if (field.id === 'patientPhone' && value) {
+                if (!validatePhone(value)) {
+                    field.style.borderColor = '#e74c3c';
+                } else {
+                    field.style.borderColor = '#27ae60';
+                }
+            }
+        });
+
+        // Auto-complete for doctor names
+        let doctorNames = [];
+        
+        async function loadDoctors() {
+            const result = await apiCall('/doctors');
+            if (result.success) {
+                doctorNames = result.doctors.map(doc => doc.name);
+                setupAutocomplete();
+            }
+        }
+
+        function setupAutocomplete() {
+            const doctorInputs = ['bookDoctor', 'rescheduleDoctor'];
+            
+            doctorInputs.forEach(inputId => {
+                const input = document.getElementById(inputId);
+                if (input) {
+                    input.addEventListener('input', (e) => {
+                        const value = e.target.value.toLowerCase();
+                        const suggestions = doctorNames.filter(name => 
+                            name.toLowerCase().includes(value)
+                        );
+                        
+                        // Remove existing suggestions
+                        const existingSuggestions = input.parentNode.querySelector('.suggestions');
+                        if (existingSuggestions) {
+                            existingSuggestions.remove();
+                        }
+                        
+                        if (suggestions.length > 0 && value.length > 1) {
+                            const suggestionsDiv = document.createElement('div');
+                            suggestionsDiv.className = 'suggestions';
+                            suggestionsDiv.style.cssText = `
+                                position: absolute;
+                                top: 100%;
+                                left: 0;
+                                right: 0;
+                                background: white;
+                                border: 2px solid #e0e6ed;
+                                border-top: none;
+                                border-radius: 0 0 12px 12px;
+                                max-height: 200px;
+                                overflow-y: auto;
+                                z-index: 1000;
+                                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                            `;
+                            
+                            suggestions.slice(0, 5).forEach(suggestion => {
+                                const suggestionItem = document.createElement('div');
+                                suggestionItem.textContent = suggestion;
+                                suggestionItem.style.cssText = `
+                                    padding: 10px 15px;
+                                    cursor: pointer;
+                                    border-bottom: 1px solid #f0f0f0;
+                                    transition: background-color 0.2s;
+                                `;
+                                suggestionItem.addEventListener('mouseenter', () => {
+                                    suggestionItem.style.backgroundColor = '#f8f9fa';
+                                });
+                                suggestionItem.addEventListener('mouseleave', () => {
+                                    suggestionItem.style.backgroundColor = 'white';
+                                });
+                                suggestionItem.addEventListener('click', () => {
+                                    input.value = suggestion;
+                                    suggestionsDiv.remove();
+                                });
+                                suggestionsDiv.appendChild(suggestionItem);
+                            });
+                            
+                            input.parentNode.style.position = 'relative';
+                            input.parentNode.appendChild(suggestionsDiv);
+                        }
+                    });
+                    
+                    // Hide suggestions when clicking outside
+                    document.addEventListener('click', (e) => {
+                        if (!input.contains(e.target)) {
+                            const suggestions = input.parentNode.querySelector('.suggestions');
+                            if (suggestions) {
+                                suggestions.remove();
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
+        // Load doctors on page load
+        loadDoctors();
+
+        // Enhanced error handling
+        window.addEventListener('error', (e) => {
+            console.error('JavaScript Error:', e);
+            showResult('appointmentResult', '❌ An unexpected error occurred. Please refresh the page and try again.', 'error');
+        });
+
+        // Network status indicator
+         function updateNetworkStatus() {
+            const isOnline = navigator.onLine;
+            const statusDiv = document.getElementById('networkStatus') || document.createElement('div');
+            statusDiv.id = 'networkStatus';
+            statusDiv.style.cssText = `
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                padding: 8px 16px;
+                border-radius: 20px;
+                font-size: 0.9em;
+                font-weight: 500;
+                z-index: 1000;
+                transition: all 0.3s ease;
+            `;
+            
+            if (isOnline) {
+                statusDiv.textContent = '🟢 Online';
+                statusDiv.style.background = 'rgba(46, 204, 113, 0.9)';
+                statusDiv.style.color = 'white';
+            } else {
+                statusDiv.textContent = '🔴 Offline';
+                statusDiv.style.background = 'rgba(231, 76, 60, 0.9)';
+                statusDiv.style.color = 'white';
+            }
+            
+            if (!document.getElementById('networkStatus')) {
+                document.body.appendChild(statusDiv);
+            }
+        }
+
+        // Monitor network status
+        window.addEventListener('online', updateNetworkStatus);
+        window.addEventListener('offline', updateNetworkStatus);
+        updateNetworkStatus();
+
+        // Data export functionality
+        function exportAppointmentData() {
+            const appointments = document.querySelectorAll('.doctor-card');
+            if (appointments.length === 0) {
+                alert('No appointment data to export');
+                return;
+            }
+            
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "Doctor,Date,Time,Status\n";
+            
+            appointments.forEach(appt => {
+                const text = appt.textContent;
+                const lines = text.split('\n').filter(line => line.trim());
+                if (lines.length >= 3) {
+                    csvContent += `"${lines[0]}","${lines[1]}","${lines[2]}","Confirmed"\n`;
+                }
+            });
+            
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "appointments.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Print functionality
+        function printAppointments() {
+            const appointments = document.getElementById('appointmentResult');
+            if (appointments.style.display === 'none') {
+                alert('No appointments to print');
+                return;
+            }
+            
+            const printWindow = window.open('', '', 'width=800,height=600');
+            printWindow.document.write(`
+                <html>
+                    <head>
+                        <title>Appointment Details</title>
+                        <style>
+                            body { font-family: Arial, sans-serif; margin: 20px; }
+                            .doctor-card { border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px; }
+                            h1 { color: #333; text-align: center; }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>🏥 Hospital Appointment Details</h1>
+                        ${appointments.innerHTML}
+                        <p style="text-align: center; margin-top: 30px; color: #666;">
+                            Generated on ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}
+                        </p>
+                    </body>
+                </html>
+            `);
+            printWindow.document.close();
+            printWindow.print();
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case 'p':
+                        e.preventDefault();
+                        printAppointments();
+                        break;
+                    case 'e':
+                        e.preventDefault();
+                        exportAppointmentData();
+                        break;
+                    case '/':
+                        e.preventDefault();
+                        document.getElementById('chatInput').focus();
+                        break;
+                }
+            }
+        });
+
+        // Add utility buttons to appointment result
+        function addUtilityButtons() {
+            const style = document.createElement('style');
+            style.textContent = `
+                .utility-buttons {
+                    display: flex;
+                    gap: 10px;
+                    margin-top: 15px;
+                    flex-wrap: wrap;
+                }
+                .utility-buttons button {
+                    font-size: 0.9em;
+                    padding: 8px 16px;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        addUtilityButtons();
+
+        // Enhanced result display with utility buttons
+        function showResultWithUtilities(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            element.innerHTML = message;
+            
+            if (elementId === 'appointmentResult' && type === 'success') {
+                element.innerHTML += `
+                    <div class="utility-buttons">
+                        <button class="btn btn-secondary" onclick="printAppointments()">🖨️ Print</button>
+                        <button class="btn btn-secondary" onclick="exportAppointmentData()">📄 Export CSV</button>
+                    </div>
+                `;
+            }
+            
+            element.className = `result ${type}`;
+            element.style.display = 'block';
+        }
+
+        // Update existing showResult calls to use enhanced version
+        window.showResult = showResultWithUtilities;
+
+        // Success message animation
+        function animateSuccess(elementId) {
+            const element = document.getElementById(elementId);
+            element.style.transform = 'scale(0.95)';
+            element.style.transition = 'transform 0.3s ease';
+            
+            setTimeout(() => {
+                element.style.transform = 'scale(1)';
+            }, 100);
+        }
+
+        // Form reset with confirmation
+        function resetFormWithConfirmation(formId) {
+            if (confirm('Are you sure you want to reset this form?')) {
+                document.getElementById(formId).reset();
+                hideResult('patientResult');
+                hideResult('appointmentResult');
+            }
+        }
+
+        // Auto-save form data to prevent loss
+        const formFields = ['patientName', 'patientDOB', 'patientAddress', 'patientPhone', 'patientEmail'];
+        
+        formFields.forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                field.addEventListener('input', () => {
+                    const formData = {};
+                    formFields.forEach(id => {
+                        const element = document.getElementById(id);
+                        if (element) formData[id] = element.value;
+                    });
+                    sessionStorage.setItem('hospitalFormData', JSON.stringify(formData));
+                });
+            }
+        });
+
+        // Restore form data on page load
+        window.addEventListener('load', () => {
+            const savedData = sessionStorage.getItem('hospitalFormData');
+            if (savedData) {
+                const formData = JSON.parse(savedData);
+                Object.keys(formData).forEach(fieldId => {
+                    const field = document.getElementById(fieldId);
+                    if (field && formData[fieldId]) {
+                        field.value = formData[fieldId];
+                    }
+                });
+            }
+        });
+
+        // Clear saved data on successful registration
+        document.getElementById('registerForm').addEventListener('submit', (e) => {
+            setTimeout(() => {
+                sessionStorage.removeItem('hospitalFormData');
+            }, 1000);
+        });
+
+        console.log('🏥 Hospital AI Receptionist Frontend Loaded Successfully');
+    </script>
+</body>
+</html>

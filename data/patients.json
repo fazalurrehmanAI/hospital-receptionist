@@ -1,0 +1,491 @@
+[
+    {
+        "patient_id": "P001",
+        "name": "Patient 1",
+        "dob": "1991-01-12",
+        "phone": "+92-300-1001001",
+        "email": "patient1@example.com",
+        "medical_history": [
+            "diabetes"
+        ]
+    },
+    {
+        "patient_id": "P002",
+        "name": "Patient 2",
+        "dob": "1992-02-12",
+        "phone": "+92-300-1001002",
+        "email": "patient2@example.com",
+        "medical_history": [
+            "asthma"
+        ]
+    },
+    {
+        "patient_id": "P003",
+        "name": "Patient 3",
+        "dob": "1991-03-12",
+        "phone": "+92-300-1001003",
+        "email": "patient3@example.com",
+        "medical_history": [
+            "diabetes"
+        ]
+    },
+    {
+        "patient_id": "P004",
+        "name": "Patient 4",
+        "dob": "1992-04-12",
+        "phone": "+92-300-1001004",
+        "email": "patient4@example.com",
+        "medical_history": [
+            "asthma"
+        ]
+    },
+    {
+        "patient_id": "P005",
+        "name": "Patient 5",
+        "dob": "1991-05-12",
+        "phone": "+92-300-1001005",
+        "email": "patient5@example.com",
+        "medical_history": [
+            "diabetes"
+        ]
+    },
+    {
+        "patient_id": "P006",
+        "name": "Patient 6",
+        "dob": "1992-06-12",
+        "phone": "+92-300-1001006",
+        "email": "patient6@example.com",
+        "medical_history": [
+            "asthma"
+        ]
+    },
+    {
+        "patient_id": "P007",
+        "name": "Patient 7",
+        "dob": "1991-07-12",
+        "phone": "+92-300-1001007",
+        "email": "patient7@example.com",
+        "medical_history": [
+            "diabetes"
+        ]
+    },
+    {
+        "patient_id": "P008",
+        "name": "Patient 8",
+        "dob": "1992-08-12",
+        "phone": "+92-300-1001008",
+        "email": "patient8@example.com",
+        "medical_history": [
+            "asthma"
+        ]
+    },
+    {
+        "patient_id": "P009",
+        "name": "Patient 9",
+        "dob": "1991-09-12",
+        "phone": "+92-300-1001009",
+        "email": "patient9@example.com",
+        "medical_history": [
+            "diabetes"
+        ]
+    },
+    {
+        "patient_id": "P010",
+        "name": "Patient 10",
+        "dob": "1992-10-12",
+        "phone": "+92-300-1001010",
+        "email": "patient10@example.com",
+        "medical_history": [
+            "asthma"
+        ]
+    },
+    {
+        "patient_id": "P011",
+        "name": "Patient 11",
+        "dob": "1991-11-12",
+        "phone": "+92-300-1001011",
+        "email": "patient11@example.com",
+        "medical_history": [
+            "diabetes"
+        ]
+    },
+    {
+        "patient_id": "P012",
+        "name": "Patient 12",
+        "dob": "1992-12-12",
+        "phone": "+92-300-1001012",
+        "email": "patient12@example.com",
+        "medical_history": [
+            "asthma"
+        ]
+    },
+    {
+        "patient_id": "P013",
+        "name": "Patient 13",
+        "dob": "1991-01-12",
+        "phone": "+92-300-1001013",
+        "email": "patient13@example.com",
+        "medical_history": [
+            "diabetes"
+        ]
+    },
+    {
+        "patient_id": "P014",
+        "name": "Patient 14",
+        "dob": "1992-02-12",
+        "phone": "+92-300-1001014",
+        "email": "patient14@example.com",
+        "medical_history": [
+            "asthma"
+        ]
+    },
+    {
+        "patient_id": "P015",
+        "name": "Patient 15",
+        "dob": "1991-03-12",
+        "phone": "+92-300-1001015",
+        "email": "patient15@example.com",
+        "medical_history": [
+            "diabetes"
+        ]
+    },
+    {
+        "patient_id": "P016",
+        "name": "Patient 16",
+        "dob": "1992-04-12",
+        "phone": "+92-300-1001016",
+        "email": "patient16@example.com",
+        "medical_history": [
+            "asthma"
+        ]
+    },
+    {
+        "patient_id": "P017",
+        "name": "Patient 17",
+        "dob": "1991-05-12",
+        "phone": "+92-300-1001017",
+        "email": "patient17@example.com",
+        "medical_history": [
+            "diabetes"
+        ]
+    },
+    {
+        "patient_id": "P018",
+        "name": "Patient 18",
+        "dob": "1992-06-12",
+        "phone": "+92-300-1001018",
+        "email": "patient18@example.com",
+        "medical_history": [
+            "asthma"
+        ]
+    },
+    {
+        "patient_id": "P019",
+        "name": "Patient 19",
+        "dob": "1991-07-12",
+        "phone": "+92-300-1001019",
+        "email": "patient19@example.com",
+        "medical_history": [
+            "diabetes"
+        ]
+    },
+    {
+        "patient_id": "P020",
+        "name": "Patient 20",
+        "dob": "1992-08-12",
+        "phone": "+92-300-1001020",
+        "email": "patient20@example.com",
+        "medical_history": [
+            "asthma"
+        ]
+    },
+    {
+        "patient_id": "P021",
+        "name": "Patient 21",
+        "dob": "1991-09-12",
+        "phone": "+92-300-1001021",
+        "email": "patient21@example.com",
+        "medical_history": [
+            "diabetes"
+        ]
+    },
+    {
+        "patient_id": "P022",
+        "name": "Patient 22",
+        "dob": "1992-10-12",
+        "phone": "+92-300-1001022",
+        "email": "patient22@example.com",
+        "medical_history": [
+            "asthma"
+        ]
+    },
+    {
+        "patient_id": "P023",
+        "name": "Patient 23",
+        "dob": "1991-11-12",
+        "phone": "+92-300-1001023",
+        "email": "patient23@example.com",
+        "medical_history": [
+            "diabetes"
+        ]
+    },
+    {
+        "patient_id": "P024",
+        "name": "Patient 24",
+        "dob": "1992-12-12",
+        "phone": "+92-300-1001024",
+        "email": "patient24@example.com",
+        "medical_history": [
+            "asthma"
+        ]
+    },
+    {
+        "patient_id": "P025",
+        "name": "Patient 25",
+        "dob": "1991-01-12",
+        "phone": "+92-300-1001025",
+        "email": "patient25@example.com",
+        "medical_history": [
+            "diabetes"
+        ]
+    },
+    {
+        "patient_id": "P026",
+        "name": "Patient 26",
+        "dob": "1992-02-12",
+        "phone": "+92-300-1001026",
+        "email": "patient26@example.com",
+        "medical_history": [
+            "asthma"
+        ]
+    },
+    {
+        "patient_id": "P027",
+        "name": "Patient 27",
+        "dob": "1991-03-12",
+        "phone": "+92-300-1001027",
+        "email": "patient27@example.com",
+        "medical_history": [
+            "diabetes"
+        ]
+    },
+    {
+        "patient_id": "P028",
+        "name": "Patient 28",
+        "dob": "1992-04-12",
+        "phone": "+92-300-1001028",
+        "email": "patient28@example.com",
+        "medical_history": [
+            "asthma"
+        ]
+    },
+    {
+        "patient_id": "P029",
+        "name": "Patient 29",
+        "dob": "1991-05-12",
+        "phone": "+92-300-1001029",
+        "email": "patient29@example.com",
+        "medical_history": [
+            "diabetes"
+        ]
+    },
+    {
+        "patient_id": "P030",
+        "name": "Patient 30",
+        "dob": "1992-06-12",
+        "phone": "+92-300-1001030",
+        "email": "patient30@example.com",
+        "medical_history": [
+            "asthma"
+        ]
+    },
+    {
+        "patient_id": "P031",
+        "name": "fazal ur rehman",
+        "dob": "2004-08-12",
+        "phone": "03276699823",
+        "email": "saifurrehmanch583@gmail.com",
+        "address": "chack no.14mr",
+        "medical_history": []
+    },
+    {
+        "patient_id": "P032",
+        "name": "yousaf john sins",
+        "dob": "2000-04-09",
+        "phone": "0326555578",
+        "email": "dair@gmail.com",
+        "address": "london",
+        "medical_history": []
+    },
+    {
+        "patient_id": "P033",
+        "name": "umar",
+        "dob": "2023-02-09",
+        "phone": "948948484",
+        "email": "dafa@gmail.com",
+        "address": "mltn",
+        "medical_history": []
+    },
+    {
+        "patient_id": "P034",
+        "name": "rana",
+        "dob": "2025-05-06",
+        "phone": "45635556",
+        "email": "fgf@gmail.com",
+        "address": "fgrd",
+        "medical_history": []
+    },
+    {
+        "patient_id": "P035",
+        "name": "Alina",
+        "dob": "2025-06-09",
+        "phone": "456789",
+        "email": "alina@gmail.com",
+        "address": "jhang",
+        "medical_history": []
+    },
+    {
+        "patient_id": "P036",
+        "name": "ayan",
+        "dob": "2023-09-09",
+        "phone": "6789",
+        "email": "ftyy",
+        "address": "fghjk",
+        "medical_history": []
+    },
+    {
+        "patient_id": "P037",
+        "name": "sajid",
+        "dob": "2003-09-08",
+        "phone": "rtyy",
+        "email": "4rtyy",
+        "address": "wertyuttr",
+        "medical_history": []
+    },
+    {
+        "patient_id": "P038",
+        "name": "fatima",
+        "dob": "1234-44-44",
+        "phone": "fghh",
+        "email": "444ghhh",
+        "address": "dfgghhh",
+        "medical_history": []
+    },
+    {
+        "patient_id": "P039",
+        "name": "ubaid",
+        "dob": "2011-09-06",
+        "phone": "03367878349",
+        "email": "fazalurrehmanch14@gmail.com",
+        "address": "lodon",
+        "medical_history": []
+    },
+    {
+        "patient_id": "P040",
+        "name": "yousaf",
+        "dob": "1999-08-26",
+        "phone": "03004567890",
+        "email": "yousuf1122@mechanicspedia.com",
+        "address": "bahawalpur",
+        "medical_history": []
+    },
+    {
+        "patient_id": "P041",
+        "name": "yousaf65",
+        "dob": "1999-08-27",
+        "phone": "345678",
+        "email": "defghjk@mechanicspedia.com",
+        "address": "bahawalpur",
+        "medical_history": []
+    },
+    {
+        "patient_id": "P042",
+        "name": "yousaffghj",
+        "dob": "2000-09-09",
+        "phone": "34567",
+        "email": "defghjk@mechanicspedia.com",
+        "address": "dfghj",
+        "medical_history": []
+    },
+    {
+        "patient_id": "P043",
+        "name": "yousuf",
+        "dob": "2000-09-09",
+        "phone": "345678",
+        "email": "defghjk@mechanicspedia.com",
+        "address": "sdfgh",
+        "medical_history": []
+    },
+    {
+        "patient_id": "P044",
+        "name": "1",
+        "dob": "1",
+        "phone": "1",
+        "email": "1",
+        "address": "1",
+        "medical_history": []
+    },
+    {
+        "patient_id": "P045",
+        "name": "Fazlu",
+        "dob": "1992-04-12",
+        "phone": "+92-300-1001004",
+        "email": "patient4@example.com",
+        "address": "bahawalpur",
+        "medical_history": []
+    },
+    {
+        "patient_id": "P046",
+        "name": "John Doe",
+        "dob": "1990-01-01",
+        "phone": "123-456-7890",
+        "email": "john@example.com",
+        "address": "123 Main St",
+        "medical_history": []
+    },
+    {
+        "patient_id": "P047",
+        "name": "John Doe",
+        "dob": "1990-01-01",
+        "phone": "123-456-7890",
+        "email": "john@example.com",
+        "address": "123 Main St",
+        "medical_history": []
+    },
+    {
+        "patient_id": "P048",
+        "name": "John Doe",
+        "dob": "1990-01-01",
+        "phone": "123-456-7890",
+        "email": "john@example.com",
+        "address": "123 Main St",
+        "medical_history": []
+    },
+    {
+        "patient_id": "P049",
+        "name": "John Doe",
+        "dob": "1990-01-01",
+        "phone": "123-456-7890",
+        "email": "john@example.com",
+        "address": "123 Main St",
+        "medical_history": []
+    },
+    {
+        "patient_id": "P050",
+        "name": "John Doe",
+        "dob": "1990-01-01",
+        "phone": "123-456-7890",
+        "email": "john@example.com",
+        "address": "123 Main St",
+        "medical_history": []
+    },
+    {
+        "patient_id": "P051",
+        "name": "Muhammad Yousuf",
+        "dob": "2000-08-26",
+        "phone": "123456789",
+        "email": "mikemowry@munik.edu.pl",
+        "address": "bahawalpur",
+        "medical_history": []
+    }
+]

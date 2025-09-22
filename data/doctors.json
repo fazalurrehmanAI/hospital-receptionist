@@ -1,0 +1,138 @@
+[
+  {
+    "name": "Dr. Sarah Ahmed",
+    "specialization": "Cardiologist",
+    "fee": "$80",
+    "education": "MBBS, FCPS (Cardiology)",
+    "experience": "10 years in cardiac care",
+    "contact": "sarah.ahmed@hospital.com",
+    "bio": "An experienced cardiologist focused on preventive and interventional heart care."
+  },
+  {
+    "name": "Dr. Ali Khan",
+    "specialization": "Pediatrician",
+    "fee": "$60",
+    "education": "MBBS, DCH",
+    "experience": "7 years treating infants and children",
+    "contact": "ali.khan@hospital.com",
+    "bio": "Specializes in childhood vaccinations, growth tracking, and common pediatric diseases."
+  },
+  {
+    "name": "Dr. Maria Siddiqui",
+    "specialization": "Dermatologist",
+    "fee": "$70",
+    "education": "MBBS, MCPS (Dermatology)",
+    "experience": "9 years in skin, hair, and nail treatment",
+    "contact": "maria.siddiqui@hospital.com",
+    "bio": "Expert in acne, skin allergies, and cosmetic dermatology."
+  },
+  {
+    "name": "Dr. Kamran Malik",
+    "specialization": "Orthopedic Surgeon",
+    "fee": "$100",
+    "education": "MBBS, FCPS (Orthopedics)",
+    "experience": "12 years performing joint and bone surgeries",
+    "contact": "kamran.malik@hospital.com",
+    "bio": "Focused on trauma care, sports injuries, and joint replacement surgeries."
+  },
+  {
+    "name": "Dr. Hira Fatima",
+    "specialization": "Gynecologist",
+    "fee": "$65",
+    "education": "MBBS, FCPS (Gynecology)",
+    "experience": "8 years in women's health and childbirth",
+    "contact": "hira.fatima@hospital.com",
+    "bio": "Skilled in prenatal care, fertility management, and safe deliveries."
+  },
+  {
+    "name": "Dr. Usman Malik",
+    "specialization": "ENT Specialist",
+    "fee": "$55",
+    "education": "MBBS, FCPS (ENT)",
+    "experience": "6 years in ENT and sinus disorders",
+    "contact": "usman@hospital.com",
+    "bio": "Treats hearing loss, tonsillitis, nasal allergies, and throat issues."
+  },
+  {
+    "name": "Dr. Ayesha Noor",
+    "specialization": "Psychiatrist",
+    "fee": "$75",
+    "education": "MBBS, FCPS (Psychiatry)",
+    "experience": "10 years in mental health and therapy",
+    "contact": "ayesha.noor@hospital.com",
+    "bio": "Expert in anxiety, depression, trauma, and family counseling."
+  },
+  {
+    "name": "Dr. Imran Qureshi",
+    "specialization": "General Physician",
+    "fee": "$50",
+    "education": "MBBS",
+    "experience": "15 years in primary healthcare",
+    "contact": "imran.qureshi@hospital.com",
+    "bio": "Experienced in treating fever, infections, and chronic diseases like diabetes."
+  },
+  {
+    "name": "Dr. Taimoor Hassan",
+    "specialization": "Urologist",
+    "fee": "$85",
+    "education": "MBBS, FCPS (Urology)",
+    "experience": "9 years treating urinary tract and kidney disorders",
+    "contact": "taimoor.hassan@hospital.com",
+    "bio": "Expert in prostate health, kidney stones, and male reproductive issues."
+  }, 
+  {
+    "name": "Dr. Sana Javed",
+    "specialization": "Neurologist",
+    "fee": "$90",
+    "education": "MBBS, FCPS (Neurology)",
+    "experience": "11 years diagnosing and treating neurological disorders",
+    "contact": "sana.javed@hospital.com",
+    "bio": "Specializes in migraines, epilepsy, stroke, and nerve diseases."
+  },
+   
+  {
+    "name": "Dr. Amina Bukhari",
+    "specialization": "Gastroenterologist",
+    "fee": "$80",
+    "education": "MBBS, FCPS (Gastroenterology)",
+    "experience": "10 years in digestive health and liver diseases",
+    "contact": "hamzanazar228@gmail.com",
+    "bio": "Specializes in IBS, liver disorders, and endoscopic procedures."  
+ },
+  {
+    "name": "Dr. Farah Siddiqui",
+    "specialization": "Endocrinologist",
+    "fee": "$95",
+    "education": "MBBS, FCPS (Endocrinology)",
+    "experience": "10 years in hormonal disorders and diabetes management",
+    "contact": "farah@hosptial.com",
+    "bio": "Expert in thyroid disorders, diabetes care, and metabolic health."
+  },
+  {
+    "name": "Dr. Muneeb Ahmed",
+    "specialization": "Ophthalmologist",
+    "fee": "$70",
+    "education": "MBBS, FCPS (Ophthalmology)",
+    "experience": "8 years in eye care and surgeries",
+    "contact": "muneeb@hospital.com",
+    "bio": "Specializes in cataract surgery, glaucoma treatment, and vision correction."
+    },
+  {
+    "name": "Dr. Ali Raza",
+    "specialization": "Oncologist",
+    "fee": "$120",              
+    "education": "MBBS, FCPS (Oncology)",
+    "experience": "15 years in cancer treatment and research",  
+    "contact": "ali.raza@hospital.com",
+    "bio": "Expert in chemotherapy, radiation therapy, and cancer care management."
+  },
+  {
+    "name": "Dr. Sarah Khan",
+    "specialization": "General Surgeon",
+    "fee": "$110",
+    "education": "MBBS, FCPS (General Surgery)",
+    "experience": "12 years in surgical procedures and trauma care",
+    "contact": "sara.khan@hosptial.com",
+    "bio": "Specializes in laparoscopic surgery, appendectomy, and hernia repair."
+  }  
+]
